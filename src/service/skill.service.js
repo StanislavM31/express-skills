@@ -18,6 +18,14 @@ function getSkillById(id) {
   if (filtered.length == 0) throw new Error('по такому id нет skills');
   return filtered;
 }
+function deleteSkillById(id) {
+  try {
+    const filtered = arr.filter(el => el.id != id);
+    return filtered;
+  } catch (error) {
+    return error.message;
+  }
+}
 
 
-module.exports = { getAllSkills, getSkillById };
+module.exports = { getAllSkills, getSkillById, deleteSkillById };
