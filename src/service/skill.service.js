@@ -26,6 +26,13 @@ function deleteSkillById(id) {
     return error.message;
   }
 }
+function createSkills( title) {
+  const obj = {
+    id: Math.floor(Math.random() * 10),
+    title,
+  };
+  arr.push(obj);
+  return arr;
+}
 
-
-module.exports = { getAllSkills, getSkillById, deleteSkillById };
+module.exports = { getAllSkills, getSkillById, deleteSkillById, createSkills };

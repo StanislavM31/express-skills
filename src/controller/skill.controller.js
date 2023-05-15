@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllSkills, getSkillById, deleteSkillById} = require('../service/skill.service');
+const { getAllSkills, getSkillById, deleteSkillById, createSkills} = require('../service/skill.service');
 
 const rout = express.Router();
 
@@ -26,5 +26,14 @@ rout.delete('/:id', (req, res) => {
   }
 });
 
+rout.post('/', (req, res) => {
+  try {
+    const { title } = req.body;
+    const data = createSkills(title);
+    res.send(data);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
 
 module.exports = rout;
