@@ -13,6 +13,11 @@ function getAllSkills() {
     return error.message;
   }
 }
+function getSkillById(id) {
+  const filtered = arr.filter(el => el.id == id);
+  if (filtered.length == 0) throw new Error('по такому id нет skills');
+  return filtered;
+}
 
 
-module.exports = { getAllSkills};
+module.exports = { getAllSkills, getSkillById };
