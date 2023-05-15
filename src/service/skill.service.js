@@ -34,5 +34,16 @@ function createSkills( title) {
   arr.push(obj);
   return arr;
 }
+function updateSkill(id, title) {
+  let flag = arr.filter(el => el.id == id);
+  if (flag.length == 0) throw new Error('нет такого id');
+  let filtered = arr.filter(el => el.id != id);
+  let obj = {
+    id,
+    title,
+  };
+  filtered.push(obj);
+  return filtered;
+}
 
-module.exports = { getAllSkills, getSkillById, deleteSkillById, createSkills };
+module.exports = { getAllSkills, getSkillById, deleteSkillById, createSkills, updateSkill };
