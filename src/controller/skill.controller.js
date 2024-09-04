@@ -1,50 +1,55 @@
 const express = require('express');
-const { getAllSkills, getSkillById, deleteSkillById, createSkills, updateSkill } = require('../service/skill.service');
+const { Service } = require('../service/skill.service');
+const route = express.Router();
 
-const rout = express.Router();
+const service = new Service();
 
-rout.get('/', (req, res) => {
-  let data = getAllSkills();
-  res.status(404).send(data);
-}); //это роут
-
-rout.get('/:id', (req, res) => {
-  try {
-    const { id } = req.params;
-    const data = getSkillById(id);
+route.get('/', (req, res) => {
+    const data = getAllSkills();
     res.status(200).send(data);
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
-});
-rout.delete('/:id', (req, res) => {
-  try {
-    const { id } = req.params;
-    res.status(200).send(deleteSkillById(id));
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
 });
 
-rout.post('/', (req, res) => {
-  try {
-    const { title } = req.body;
-    const data = createSkills(title);
-    res.send(data);
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
+route.get('/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = getSkillById(id);
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+
 });
 
-rout.put('/:id', (req, res) => {
-  try {
-    //по id обновляем title
-    const { id } = req.params;
-    const { title } = req.body;
-    let data = updateSkill(id, title);
-    res.status(200).send(data);
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
+route.delete('/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = deleteSkill(id);
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+
 });
-module.exports = rout;
+
+route.post('/', (req, res) => {
+    try {
+        const { title } = req.body;
+        const data = createSkill(title)
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+});
+
+route.put('/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title } = req.body;
+        const data = updateSkill(id, title);
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(404).send(err.message);
+    }
+});
+
+module.exports = route;

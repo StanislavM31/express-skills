@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const rout = require('./controller/skill.controller');
+const route = require('./controller/skill.controller');
+
 const app = express();
 
-app.use(bodyParser.json()); //middleware парсинга
+app.use(bodyParser.json());
 
-app.use('/skill', rout); //middleware уровня маршрутизатора
+app.use('/skill', route); //middleware уровня маршрутизатора
 
 module.exports = app;
